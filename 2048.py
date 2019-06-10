@@ -53,6 +53,7 @@ def randomPosition(tableList):
             break
         else:
             continue
+    return tableList
 
 
 def control(tableList):
@@ -73,6 +74,7 @@ def control(tableList):
         downCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine)
     elif Input == commands[3]:
         rightCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine)
+    return tableList
 
 
 def commandBody(newTableList):
@@ -139,9 +141,10 @@ def commandBody(newTableList):
                     fourthIndex = 0
                     canRandom = True
         newTableList[x][0] = firstIndex 
-        newTableList[x][1] = secondIndex 
+        newTableList[x][1] = secondIndex
         newTableList[x][2] = thirdIndex
         newTableList[x][3] = fourthIndex
+    return newTableList
 
 
 def upCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine):
@@ -162,6 +165,7 @@ def upCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthL
         for y in range(4):
             tableList[temp] = newTableList[y][x]
             temp += 1
+    return tableList
 
 
 def leftCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine):
@@ -182,6 +186,7 @@ def leftCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourt
         for y in range(4):
             tableList[temp] = newTableList[x][y]
             temp += 1
+    return tableList
 
 
 def downCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine):
@@ -202,6 +207,7 @@ def downCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourt
         for y in range(4):
             tableList[temp] = newTableList[y][x]
             temp += 1
+    return tableList
 
 
 def rightCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine):
@@ -222,7 +228,7 @@ def rightCommand(tableList, newTableList, firstLine, secondLine, thirdLine, four
         for y in range(3,-1,-1):
             tableList[temp] = newTableList[x][y]
             temp += 1
-
+    return tableList
 
 def main(tableList):
     global canRandom
