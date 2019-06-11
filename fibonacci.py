@@ -1,4 +1,3 @@
-
 howMany = int(input("How many numbers you want to print out?: "))
 countListIndex = 0
 nextNumber = 0
@@ -17,7 +16,7 @@ while(countListIndex < howMany):
 def Print():
     onespace = str(len(str(howMany)) + 1)
     twospace = str(len(str(fibonacci[howMany - 1])) + 1)
-    space = "{:<" + onespace + "s} {:>" + twospace + "d}"
+    space = "{:<" + onespace + "} {:>" + twospace + "}"
 
     for x in range(howMany):
         print(space.format(str(x + 1) + ":", fibonacci[x]))
