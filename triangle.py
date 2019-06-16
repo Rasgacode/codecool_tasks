@@ -11,8 +11,8 @@ while True:
     except ValueError:
         print("Please use only numbers!")
         continue
-    if ax < -100 or ay < -100 or bx < -100 or by < -100 or cx < -100 or cy < - \
-            100 or ax > 100 or ay > 100 or bx > 100 or by > 100 or cx > 100 or cy > 100:
+    if ax < -100 or ay < -100 or bx < -100 or by < -100 or cx < -100 or cy < -100 \
+            or ax > 100 or ay > 100 or bx > 100 or by > 100 or cx > 100 or cy > 100: # min(ax, ay, bx, by) < -100
         print("One of your numbers was out of range!")
         continue
     break

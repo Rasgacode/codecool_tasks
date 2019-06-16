@@ -1,24 +1,33 @@
-import random, os
+import os, getch, random, sys
 
-canRandom = False
-firstLine = []
-secondLine = []
-thirdLine = []
-fourthLine = []
-newTableList = []
-tableList = []
-for x in range(16):
-    tableList.append(0)
+
+def main():
+    board = []
+    load_board(board)
+    random_2(board)
+    random_2(board)
+    while(True):
+        cls()
+        print_board(board)
+        control(board)
 
 
 def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def table(tableList):
+def load_board(board):
+    for x in range(4):
+        board.append([])
+        for y in range(4):
+            board[x].append(0)
+
+
+def print_board(board):
     separator = "|"
-    dash = "-" * 21
+    dash = "+----" * 4 + "+"
     colors = {
+    2: "\033[88m   2\033[00m",
     4: "\033[91m   4\033[00m",
     8: "\033[92m   8\033[00m", 
     16: "\033[93m  16\033[00m", 
@@ -27,227 +36,152 @@ def table(tableList):
     128: "\033[97m 128\033[00m", 
     256: "\033[33m 256\033[00m", 
     512: "\033[34m 512\033[00m", 
-    1024: "\033[95m1024\033[00m"
+    1024: "\033[95m1024\033[00m",
+    2048: "\033[90m2048\033[00m"
     }
-    print(dash)
-    for x in range(16):
-        if tableList[x] == 0:
-            print("|{:>4}".format(''), end="") 
-        elif tableList[x] == 2 or tableList[x] == 2048:
-            print("|{:>4}".format(tableList[x]), end="")
-        else:
-            for key, value in colors.items():
-                if key == tableList[x]:
-                    print(separator+value, end="")
-                    break
-        if x == 3 or x == 7 or x == 11 or x == 15:
-            print(separator)
+    for x in range(len(board)):
+        if x == 0:
             print(dash)
+        for y in range(len(board)):
+            if board[x][y] == 0:
+                print(separator + "{:>4}".format(""), end = "")
+            else:
+                print(separator + colors[board[x][y]], end = "")
+        print(separator)
+        print(dash)
+    print("Use w,a,s,d to control the board!")
 
 
-def randomPosition(tableList):
+def random_2(board):
     while(True):
-        randomNum = random.randint(0, 15)
-        if tableList[randomNum] == 0:
-            tableList[randomNum] = 2
+        x = random.randint(0,3)
+        y = random.randint(0,3)
+        if board[x][y] == 0:
+            board[x][y] = 2
             break
-        else:
-            continue
-    return tableList
 
 
-def control(tableList):
-    commands = ["w", "a", "s", "d"]
-    while(True):
-        Input = input("Enter a command(w,a,s,d): ")
-        if Input not in commands:
-            print("Use w,a,s,d!")
-            continue
-        else:
+def control(board):
+    can_random = False
+    rotated = []
+    pressed_b = getch.getch()
+    if pressed_b == "w":
+        temp = list(zip(*board))
+        for x in temp:
+            rotated.append(list(x))
+        can_random = moves(rotated)
+        board.clear()
+        temp = list(zip(*rotated))
+        for x in temp:
+            board.append(list(x))
+    elif pressed_b == "a":
+        for x in board:
+            rotated.append(x)
+        can_random = moves(rotated)
+        board.clear()
+        for x in rotated:
+            board.append(x)
+    elif pressed_b == "s":
+        temp = list(zip(*board[::-1]))
+        for x in temp:
+            rotated.append(list(x))
+        can_random = moves(rotated)
+        board.clear()
+        temp = list(zip(*rotated))
+        temp = temp[::-1]
+        for x in temp:
+            board.append(list(x))
+    elif pressed_b == "d":
+        for x in board:
+            rotated.append(x[::-1])
+        can_random = moves(rotated)
+        board.clear()
+        for x in rotated:
+            board.append(x[::-1])
+    i = 0
+    for x in board:
+        if any(y == 2048 for y in x):
+            print("\033[91mYOU REACHED 2048! GGWP!\033[00m")
+            sys.exit()
+        if any(y == 0 for y in x):
             break
-            
-    if Input == commands[0]:
-        upCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine)
-    elif Input == commands[1]:
-        leftCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine)
-    elif Input == commands[2]:
-        downCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine)
-    elif Input == commands[3]:
-        rightCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine)
-    return tableList
+        elif i == 3:
+            print("\033[91mGAME OVER\033[00m")
+            sys.exit()
+        i += 1
+    if can_random == True:
+        random_2(board)
 
 
-def commandBody(newTableList):
-    global canRandom
+def moves(rotated):
+    can_random = False
     for x in range(4):
-        firstIndex = newTableList[x][0]
-        secondIndex = newTableList[x][1]
-        thirdIndex = newTableList[x][2]
-        fourthIndex = newTableList[x][3]
+        first_index = rotated[x][0]
+        second_index = rotated[x][1]
+        third_index = rotated[x][2]
+        fourth_index = rotated[x][3]
         observer = [True, True]
         for y in range(1, 4):
-            if newTableList[x][y] == 0:
+            if rotated[x][y] == 0:
                 continue
             else:
-                if y == 1 and firstIndex == 0:
-                    firstIndex += secondIndex
-                    secondIndex = 0
-                    canRandom = True
-                elif y == 1 and firstIndex == secondIndex:
-                    firstIndex += secondIndex
-                    secondIndex = 0
+                if y == 1 and first_index == 0:
+                    first_index += second_index
+                    second_index = 0
+                    can_random = True
+                elif y == 1 and first_index == second_index:
+                    first_index += second_index
+                    second_index = 0
                     observer[0] = False
-                    canRandom = True
-                elif y == 2 and secondIndex == 0 and firstIndex == 0:
-                    firstIndex += thirdIndex
-                    thirdIndex = 0
-                    canRandom = True
-                elif y == 2 and secondIndex == 0 and firstIndex == thirdIndex and observer[0] == True:
-                    firstIndex += thirdIndex
-                    thirdIndex = 0
+                    can_random = True
+                elif y == 2 and second_index == 0 and first_index == 0:
+                    first_index += third_index
+                    third_index = 0
+                    can_random = True
+                elif y == 2 and second_index == 0 and first_index == third_index and observer[0] == True:
+                    first_index += third_index
+                    third_index = 0
                     observer[0] = False
-                    canRandom = True
-                elif y == 2 and secondIndex == 0:
-                    secondIndex += thirdIndex
-                    thirdIndex = 0
-                    canRandom = True
-                elif y == 2 and secondIndex == thirdIndex:
-                    secondIndex += thirdIndex
-                    thirdIndex = 0
+                    can_random = True
+                elif y == 2 and second_index == 0:
+                    second_index += third_index
+                    third_index = 0
+                    can_random = True
+                elif y == 2 and second_index == third_index:
+                    second_index += third_index
+                    third_index = 0
                     observer[1] = False
-                    canRandom = True
-                elif y == 3 and thirdIndex == 0 and secondIndex == 0 and firstIndex == 0:
-                    firstIndex += fourthIndex
-                    fourthIndex = 0
-                    canRandom = True
-                elif y == 3 and thirdIndex == 0 and secondIndex == 0 and firstIndex == fourthIndex and observer[0] == True:
-                    firstIndex += fourthIndex
-                    fourthIndex = 0
-                    canRandom = True
-                elif y == 3 and thirdIndex == 0 and secondIndex == 0:
-                    secondIndex += fourthIndex
-                    fourthIndex = 0
-                    canRandom = True
-                elif y == 3 and thirdIndex == 0 and secondIndex == fourthIndex and observer[1] == True:
-                    secondIndex += fourthIndex
-                    fourthIndex = 0
-                    canRandom = True
-                elif y == 3 and thirdIndex == 0:
-                    thirdIndex += fourthIndex
-                    fourthIndex = 0
-                    canRandom = True
-                elif y == 3 and thirdIndex == fourthIndex:
-                    thirdIndex += fourthIndex
-                    fourthIndex = 0
-                    canRandom = True
-        newTableList[x][0] = firstIndex 
-        newTableList[x][1] = secondIndex
-        newTableList[x][2] = thirdIndex
-        newTableList[x][3] = fourthIndex
-    return newTableList
+                    can_random = True
+                elif y == 3 and third_index == 0 and second_index == 0 and first_index == 0:
+                    first_index += fourth_index
+                    fourth_index = 0
+                    can_random = True
+                elif y == 3 and third_index == 0 and second_index == 0 and first_index == fourth_index and observer[0] == True:
+                    first_index += fourth_index
+                    fourth_index = 0
+                    can_random = True
+                elif y == 3 and third_index == 0 and second_index == 0:
+                    second_index += fourth_index
+                    fourth_index = 0
+                    can_random = True
+                elif y == 3 and third_index == 0 and second_index == fourth_index and observer[1] == True:
+                    second_index += fourth_index
+                    fourth_index = 0
+                    can_random = True
+                elif y == 3 and third_index == 0:
+                    third_index += fourth_index
+                    fourth_index = 0
+                    can_random = True
+                elif y == 3 and third_index == fourth_index:
+                    third_index += fourth_index
+                    fourth_index = 0
+                    can_random = True
+        rotated[x][0] = first_index 
+        rotated[x][1] = second_index
+        rotated[x][2] = third_index
+        rotated[x][3] = fourth_index
+    return  can_random
 
-
-def upCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine):
-    firstLine = [tableList[0], tableList[4],
-                tableList[8], tableList[12]]
-    secondLine = [tableList[1], tableList[5],
-                tableList[9], tableList[13]]
-    thirdLine = [tableList[2], tableList[6],
-                tableList[10], tableList[14]]
-    fourthLine = [tableList[3], tableList[7],
-                tableList[11], tableList[15]]
-    newTableList = [firstLine, secondLine, thirdLine, fourthLine]
-
-    commandBody(newTableList)
-
-    temp = 0
-    for x in range(4):
-        for y in range(4):
-            tableList[temp] = newTableList[y][x]
-            temp += 1
-    return tableList
-
-
-def leftCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine):
-    firstLine = [tableList[0], tableList[1],
-                tableList[2], tableList[3]]
-    secondLine = [tableList[4], tableList[5],
-                tableList[6], tableList[7]]
-    thirdLine = [tableList[8], tableList[9],
-                tableList[10], tableList[11]]
-    fourthLine = [tableList[12], tableList[13],
-                tableList[14], tableList[15]]
-    newTableList = [firstLine, secondLine, thirdLine, fourthLine]
-
-    commandBody(newTableList)
-
-    temp = 0
-    for x in range(4):
-        for y in range(4):
-            tableList[temp] = newTableList[x][y]
-            temp += 1
-    return tableList
-
-
-def downCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine):
-    firstLine = [tableList[12], tableList[8],
-                tableList[4], tableList[0]]
-    secondLine = [tableList[13], tableList[9],
-                tableList[5], tableList[1]]
-    thirdLine = [tableList[14], tableList[10],
-                tableList[6], tableList[2]]
-    fourthLine = [tableList[15], tableList[11],
-                tableList[7], tableList[3]]
-    newTableList = [firstLine, secondLine, thirdLine, fourthLine]
-
-    commandBody(newTableList)
-
-    temp = 0
-    for x in range(3,-1,-1):
-        for y in range(4):
-            tableList[temp] = newTableList[y][x]
-            temp += 1
-    return tableList
-
-
-def rightCommand(tableList, newTableList, firstLine, secondLine, thirdLine, fourthLine):
-    firstLine = [tableList[3], tableList[2],
-                tableList[1], tableList[0]]
-    secondLine = [tableList[7], tableList[6],
-                tableList[5], tableList[4]]
-    thirdLine = [tableList[11], tableList[10],
-                tableList[9], tableList[8]]
-    fourthLine = [tableList[15], tableList[14],
-                tableList[13], tableList[12]]
-    newTableList = [firstLine, secondLine, thirdLine, fourthLine]
-
-    commandBody(newTableList)
-
-    temp = 0
-    for x in range(4):
-        for y in range(3,-1,-1):
-            tableList[temp] = newTableList[x][y]
-            temp += 1
-    return tableList
-
-def main(tableList):
-    global canRandom
-    randomPosition(tableList)
-    randomPosition(tableList)
-    while(True):
-        if 0 not in tableList:
-            print("GAME OVER!")
-            break
-        cls()
-        if canRandom == True:
-            randomPosition(tableList)
-            canRandom = False
-        table(tableList)
-        if 2048 in tableList:
-            print("You reached 2048! GGWP!")
-            break
-        control(tableList)
-        
 
 if __name__ == "__main__":
-    main(tableList)
+    main()

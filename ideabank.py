@@ -10,7 +10,6 @@ def Print():
 
 if len(sys.argv) == 2 and sys.argv[1] == "--list":
     Print()
-    sys.exit()
 elif len(sys.argv) == 3 and sys.argv[1] == "--delete":
     innerList = [line.strip() for line in open('output.txt')]
     index = int(sys.argv[2]) - 1
