@@ -130,7 +130,9 @@ def moves(rotated):
                     rotated[x][y] = 0
                     observer[0] = False
                     can_random = True
-            elif y > 1 and rotated[x][1] == 0 or rotated[x][1] == rotated[x][y] and observer[1] == True and y > 1:
+            else:
+                observer[0] = False
+            if y > 1 and rotated[x][1] == 0 or rotated[x][1] == rotated[x][y] and observer[1] == True and y > 1:
                 if rotated[x][1] == 0:
                     rotated[x][1] += rotated[x][y]
                     rotated[x][y] = 0
@@ -140,7 +142,9 @@ def moves(rotated):
                     rotated[x][y] = 0
                     observer[1] = False
                     can_random = True
-            elif y > 2 and rotated[x][2] == 0 or rotated[x][2] == rotated[x][y] and y > 2:
+            elif y > 1:
+                observer[1] = False
+            if y > 2 and rotated[x][2] == 0 or rotated[x][2] == rotated[x][y] and y > 2:
                 rotated[x][2] += rotated[x][y]
                 rotated[x][y] = 0
                 can_random = True
