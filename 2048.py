@@ -98,17 +98,17 @@ def control(board):
         board.clear()
         for x in rotated:
             board.append(x[::-1])
-    y = 0
+    i = 0
     for x in board:
         if any(y == 2048 for y in x):
             print("\033[91mYOU REACHED 2048! GGWP!\033[00m")
             sys.exit()
         if any(y == 0 for y in x):
             break
-        elif y == 3:
+        elif i == 3:
             print("\033[91mGAME OVER\033[00m")
             sys.exit()
-        y += 1
+        i += 1
     if can_random == True:
         random_2(board)
 
