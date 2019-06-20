@@ -3,7 +3,7 @@ import os, getch, random, sys
 
 def main():
     board = []
-    load_board(board)
+    fill_board(board)
     random_2(board)
     random_2(board)
     while(True):
@@ -16,7 +16,7 @@ def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def load_board(board):
+def fill_board(board):
     for x in range(4):
         board.append([])
         for y in range(4):

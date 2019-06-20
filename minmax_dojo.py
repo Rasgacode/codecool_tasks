@@ -1,3 +1,4 @@
+import test
 numbers = [-5, 23, 0, -9, 12, 99, 105, -43]
 
 for x in range(len(numbers)):
@@ -8,3 +9,5 @@ for x in range(len(numbers)):
             numbers[y] = temp
 print(numbers[0])
 print(numbers[len(numbers)-1])
+
+test.test()
