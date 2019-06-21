@@ -58,7 +58,7 @@ def sort_n_list(football_dict):
 
     print_list = sorted(football_dict.items(), key=lambda x: x[1], reverse=True)
     print(head_n_foot)
-    print(f"{separator}   {name:^{max_len_name}}{separator}{pts:^{max_len_pts}}{separator}")
+    print(f"{separator}{name:^{max_len_name + 3}}{separator}{pts:^{max_len_pts}}{separator}")
     for key, value in print_list:
         placing_str = str(placing) + "."
         print(dash)
