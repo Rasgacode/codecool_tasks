@@ -1,4 +1,4 @@
-import os
+import getch, random, os, time
 
 
 def main():
@@ -7,7 +7,7 @@ def main():
     load_dict(main_dict,text)
     cls()
     while(True):
-        print("\033[91mYou can use exit,list,save,clear(delete all data)\nand remove commands on the command line.\033[00m")
+        print("\033[91mYou can use exit,list,save,clear(delete all data),\nmatch(simulate a team vs team match) and remove(remove only one team)\ncommands on the command line.\033[00m")
         data_input = input("Enter a team and their points(split with comma): ").split(",")
         if data_input[0] == "remove":
             if data_input[1] not in main_dict.keys():
@@ -15,6 +15,8 @@ def main():
                 continue
             else:
                 remove_team(main_dict, data_input)
+        elif data_input[0] == "match":
+            match(main_dict)
         elif data_input[0] == "exit":
             temp = input("Do you want to save your project?(y/n): ")
             if temp == "y":
@@ -48,7 +50,7 @@ def update_dict(football_dict, team_and_point):
 
 def sort_n_list(football_dict):
     name = "Team name"
-    pts = "Pts"
+    pts = "Ratings"
     max_len_name = max([len(key) for key in football_dict.keys()] + [len(str(name))])
     max_len_pts = max([len(str(value)) for value in football_dict.values()] + [len(str(pts))])
     dash = "+" + ("-" * (max_len_name + 3)) + "+" + ("-" * max_len_pts) + "+"
@@ -92,6 +94,45 @@ def clear_all(football_dict,text_name):
 def remove_team(football_dict, team):
     del football_dict[team[1]]
 
+
+def match(football_dict):
+    home = []
+    home_goals = 0
+    away = []
+    away_goals = 0
+    picked_home = input("Pick a home team: ")
+    picked_away = input("Pick an away team: ")
+    for x in range(10):
+        n = random.randint(1,10)
+        if x < 5:
+            home.append(float(n) * (football_dict[picked_home] / 100))
+        else:
+            away.append(float(n) * (football_dict[picked_away] / 100))
+    #home = sorted(home,reverse=True)
+    #away = sorted(away,reverse=True)
+    n = 0
+    s = ""
+    while(s != "s"):
+        cls()
+        print("Push \'s\' to start the match!" )
+        s = getch.getch()
+    for x in range(5):
+        if home[x] - 2 >= away[x]:
+            time.sleep(2)
+            home_goals += 1
+            n = random.randint(n + 1,(x + 1)*19)
+            print(f"{picked_home} {home_goals}-{away_goals} {picked_away} {n}'")
+        elif away[x] - 3 >= home[x]:
+            time.sleep(2)
+            away_goals += 1
+            n = random.randint(n + 1,(x + 1)*19)
+            print(f"{picked_home} {home_goals}-{away_goals} {picked_away} {n}'")
+    time.sleep(2)
+    print(f"{picked_home} {home_goals}-{away_goals} {picked_away} FT")
+
+
+#def fixtures(football_dict):
+    
 
 if __name__ == "__main__":
     main()
