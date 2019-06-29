@@ -1,6 +1,4 @@
-Barcelona,90
-Real Madrid,85
-Atletico Madrid,82
-Sevilla,80
-Valencia,75
-Rayo Vallecano,60
+lol,80
+recsk,73
+egi,67
+kutya,45

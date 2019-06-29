@@ -1,0 +1,4 @@
+lol,recsk,egi,kutya
+recsk,lol,egi,kutya
+egi,lol,recsk,kutya
+kutya,lol,recsk,egi
