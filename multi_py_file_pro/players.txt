@@ -1,0 +1,24 @@
+Real Madrid,Jovic,Hazard,Kubo
+Barcelona,Messi,Suarez,Coutinho
+Atletico Madrid,Griezmann,Morata,Saul
+Liverpool,Salah,Firmino,Mané
+Manchester City,Agüero,Sterling,Sane
+Tottenham,Kane,Son,Lucas
+Juventus,Dybala,Ronaldo,Mandzukic
+Bayern München,Lewandowski,Gnabry,Goretzka
+Dortmund,Alcacer,Reus,Sancho
+PSG,Neymar,Cavani,Mbappe
+Manchester United,Pogba,Lukaku,Rashford
+Arsenal,Aubameyang,Lacazette,Mkhitaryan
+Chelsea,Pedro,Loftus-Cheek,Higuain
+Lyon,Dembele,Depay,Fekir
+Napoli,Milik,Mertens,Insigne
+Ajax,Tadic,Huntelaar,Ziyech
+Fc Porto,Soares,Marega,Brahimi
+Benfica,Seferovic,Silva,Joao
+Inter,Icardi,Perisic,Nainggolan
+PSV,de Jong,Lozano,Bergwijn
+Young Boys,Hoaru,Fassnacht,Assale
+Basel,Ajeti,van Wolfswinkel,Zuffi
+Sevilla,Ben Yedder,Sarabia,Morales
+Valencia,Parejo,Rodrigo,Mina

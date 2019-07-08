@@ -1,12 +1,8 @@
-Barcelona,90
-Atletico Madrid,86
-Real Madrid,83
-Valencia,81
-Sevilla,79
-Espanyol,77
-Getafe,75
-Celta Vigo,69
-Levante,67
-Girona,65
-Real Betis,63
-Real Valladolid,59
+Liverpool,92
+Manchester City,92
+Barcelona,91
+Real Madrid,90
+Juventus,89
+PSG,88
+Bayern München,87
+Ajax,85
