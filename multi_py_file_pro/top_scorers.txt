@@ -1,0 +1,18 @@
+Coutinho,8
+Saul,7
+Suarez,6
+Sarabia,6
+Messi,5
+Hazard,5
+Griezmann,5
+Marega,5
+Kubo,4
+Morales,4
+Morata,4
+Ben Yedder,3
+Rodrigo,3
+Parejo,3
+Mina,2
+Jovic,2
+Soares,2
+Brahimi,2

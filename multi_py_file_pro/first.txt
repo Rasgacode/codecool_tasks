@@ -1,8 +1,6 @@
-Liverpool,92
-Manchester City,92
-Barcelona,91
-Real Madrid,90
-Juventus,89
-PSG,88
-Bayern München,87
-Ajax,85
+Barcelona,88
+Atletico Madrid,85
+Real Madrid,80
+Valencia,78
+Sevilla,76
+Fc Porto,72

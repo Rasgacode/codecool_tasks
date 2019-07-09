@@ -1,8 +1,6 @@
-Liverpool,0,0,0,0,0,0,0,0
-Manchester City,0,0,0,0,0,0,0,0
-Barcelona,0,0,0,0,0,0,0,0
-Real Madrid,0,0,0,0,0,0,0,0
-Juventus,0,0,0,0,0,0,0,0
-PSG,0,0,0,0,0,0,0,0
-Bayern München,0,0,0,0,0,0,0,0
-Ajax,0,0,0,0,0,0,0,0
+Barcelona,10,6,3,1,19,11,8,21
+Atletico Madrid,10,7,0,3,16,8,8,21
+Fc Porto,10,4,1,5,9,12,-3,13
+Real Madrid,10,3,3,4,11,10,1,12
+Sevilla,10,2,3,5,13,13,0,9
+Valencia,10,3,0,7,8,22,-14,9

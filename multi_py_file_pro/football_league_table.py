@@ -88,6 +88,8 @@ def main():
                 create_table(main_dict, table)
                 save(main_dict, text1)
                 save_table(table, text3)
+                create_schedule(main_dict,fixture_list)
+                save_schedule(fixture_list,text2)
                 cls()
                 sort_n_list(main_dict)
                 print("Your table has cleared!")
