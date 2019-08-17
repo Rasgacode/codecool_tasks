@@ -1,6 +1,10 @@
+Manchester City,91
+Liverpool,90
+Real Madrid,88
 Barcelona,88
 Atletico Madrid,85
-Real Madrid,80
-Valencia,78
-Sevilla,76
-Fc Porto,72
+Sevilla,83
+Inter,80
+Valencia,80
+Young Boys,70
+Basel,65
